@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Регистрация</title>
+        <link rel="stylesheet" href="{{STATIC_URL}}/static/css/register.css">
+    </head>
+
+    <body>
+        <div class="reg">
+            <form method="POST">{% csrf_token %}
+                <h1>Регистрация</h1>
+                {% if request.user.is_authenticated %}
+                <h2>Вы уже вошли в аккаунт, {{ request.user.username }}</h2>
+                <a href="../"> Все записи</a>
+                <h2></h2>
+                <a href="../logout/"> Выйти из аккаунта</a>
+                {% else %}
+                <h2>Имя пользователя</h2>
+                <input type="text" name="username" placeholder="Имя пользователя" value="{{ form.username }}">
+                <h2>Адрес электронной почты</h2>
+                <input type="text" name="email" placeholder="Адрес электронной почты" value="{{ form.email }}">
+                <h2>Пароль</h2>
+                <input type="text" name="password" placeholder="Пароль" value="{{ form.password }}">
+                <h2></h2>
+                <input type="submit" value="Зарегистрироваться">
+                <h2></h2>
+                {% endif %}
+            </form>
+            {{ form.errors }}   
+        </div>
+    </body>
+</html>  
